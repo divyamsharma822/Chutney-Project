@@ -11,7 +11,7 @@ const PopUp = ({ onClick, index }) => {
     const [Password, setPassword] = useState(data.Password);
 
     const dispatch = useDispatch();
-    const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(true);
 
     const handleClick = () => {
         setToggle(!toggle);
