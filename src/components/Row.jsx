@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PopUp from "./PopUp";
 import "./Row.css";
 
-const Row = ({ name, reg, email, password }) => {
+const Row = ({ name, reg, email, password, index }) => {
     const [toggle, setToggle] = useState(true);
 
     const handleClick = () => {
@@ -10,9 +10,10 @@ const Row = ({ name, reg, email, password }) => {
     };
 
     return (
-        <div className='row' onClick={handleClick}>
+        <div>
+       
             {toggle ? (
-                <div>
+                <div className='row' onClick={handleClick}>
                     {name && (
                         <div>
                             <b>Name </b> : {name}
@@ -27,12 +28,9 @@ const Row = ({ name, reg, email, password }) => {
                 </div>
             ) : (
                 <PopUp
-                    email={email}
-                    password={password}
-                    name={name}
-                    reg={reg}
                     toggle={toggle}
                     onClick={handleClick}
+                    index={index}
                 />
             )}
         </div>

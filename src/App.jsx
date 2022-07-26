@@ -1,18 +1,29 @@
 import React, { useState } from "react";
 import "./App.css";
 import Row from "./components/Row";
+import { useSelector, useDispatch } from "react-redux";
+import { add } from "./features/dataSlice";
 
 function App() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [reg, setReg] = useState(-1);
     const [password, setPassword] = useState("");
-    const [arr, setArr] = useState([]);
+
+    const dispatch = useDispatch();
+    const data = useSelector(state => state.data.list);
+    console.log(data);
 
     const handlesubmit = (e) => {
         e.preventDefault();
-        setArr([...arr, { StudentName: name, StudentPassword: password ,StudentEmail :email , StudentReg: reg}]);
-        console.log(arr);
+        dispatch(
+            add({
+                Name: name,
+                Email: email,
+                Reg: reg,
+                Password: password,
+            })
+        );
     };
 
     return (
@@ -46,12 +57,14 @@ function App() {
                 <button type='submit'>Submit</button>
             </form>
             <div className='container'>
-                {arr.map((curr) => (
+                { data.map((curr, i) => (
                     <Row
-                        name={curr.StudentName}
-                        email={curr.StudentEmail}
-                        password={curr.StudentPassword}
-                        reg={curr.StudentReg}
+                        key={i}
+                        index={i}
+                        name={curr.Name}
+                        email={curr.Email}
+                        password={curr.Password}
+                        reg={curr.Reg}
                     />
                 ))}
             </div>
